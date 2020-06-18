@@ -18,7 +18,7 @@ $ cat sqs-notif.json
 $ awslocal s3api put-bucket-notification-configuration --bucket testbucket --notification-configuration file://sqs-notif.json
 ```
 
-# Lambda - Registering s3 bucket notification
+## Lambda - Registering s3 bucket notification
 
 ```
 $ cat lambda-notif.json 

@@ -4,7 +4,7 @@
 $ awslocal s3api put-bucket-notification-configuration --bucket testbucket --notification-configuration "{}"
 ```
 
-## Registering s3 bucket notification (on create record) using a JSON notification file 
+## SQS - Registering s3 bucket notification
 
 ```
 $ cat sqs-notif.json 
@@ -16,4 +16,19 @@ $ cat sqs-notif.json
     }]
 }
 $ awslocal s3api put-bucket-notification-configuration --bucket testbucket --notification-configuration file://sqs-notif.json
+```
+
+# Lambda - Registering s3 bucket notification
+
+```
+$ cat lambda-notif.json 
+{
+	"LambdaFunctionConfigurations": [
+	{
+		"Id":"S3EventsLambdaNotification",
+		"LambdaFunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:handler",
+		"Events": ["s3:ObjectCreated:*"]
+	}]
+}
+$ awslocal s3api put-bucket-notification-configuration --bucket testbucket --notification-configuration file://lambda-notif.json
 ```
